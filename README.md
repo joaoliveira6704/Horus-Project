@@ -68,6 +68,11 @@ Named after the ancient Egyptian god of the sky, kingship, and protection - ofte
   - Major labels every 500 ft
   - Current altitude highlight box
   - AGL (Above Ground Level) display
+  - Barometric Altitude based on QNH, ISA, OAT
+
+- **QNH Display**
+  - HPa;
+  - inHg;
 
 - **Speed Indicator**
   - Vertical speed tape

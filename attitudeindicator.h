@@ -327,7 +327,8 @@ private:
             QString text = QString::number(abs(int(baroAltitude)));
             painter.drawText(tapeX + 4, 1, "NEG " + text);
         }
-        painter.drawText(tapeX-3, -62, "ALT AGL");
+        painter.drawText(tapeX-3, -62, "BARO ALT (FEET)");
+        painter.drawText(55, 65, "ALT AGL: " + QString::number(int(altitude)) + "FT");
         painter.restore();
     }
 
