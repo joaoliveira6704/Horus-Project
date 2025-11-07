@@ -69,15 +69,22 @@ Named after the ancient Egyptian god of the sky, kingship, and protection - ofte
   - Current altitude highlight box
   - AGL (Above Ground Level) display
 
-- **Speed Indicator** *(Coming Soon)*
+- **Speed Indicator**
   - Vertical speed tape
   - Airspeed readout
-  - Ground speed display
+  - Ground speed display (soon)
 
-- **Heading Indicator** *(Coming Soon)*
-  - Compass rose
-  - Heading bug
-  - Course deviation
+- **Heading Indicator**
+  - Heading Tape
+  - NSWE Text Implemented
+
+- **RPM Gauges**
+  - Add multiple rpm readouts (maximum 4 recommended)
+  - Animated progress tape (soon)
+  
+- **Battery Indicator**
+  - Battery readout (Volts)
+  - Battery percentage (soon)
 
 ### GPS & Navigation *(Planned)*
 
