@@ -18,7 +18,7 @@ public:
     }
 
 
-    void setAttitude(float pitchDeg, float rollDeg, float altFt, float speedKts, float headingDeg, std::string fltMode, std::string timeCurr, int rpmVal, float batteryStateVal, int propQuantityVal) {
+    void setAttitude(float pitchDeg, float rollDeg, float altFt, float speedKts, float headingDeg, std::string fltMode, std::string timeCurr, const int rpmVal[4], float batteryStateVal, int propQuantityVal) {
         pitch = -pitchDeg;
         roll = rollDeg;
         altitude = altFt;
@@ -26,7 +26,9 @@ public:
         heading = headingDeg;
         flightMode = fltMode;
         currTime = timeCurr;
-        rpm = rpmVal;
+        for (int i = 0; i < 4; i++) {
+            rpm[i] = rpmVal[i];
+        }
         batteryState = batteryStateVal;
         propQuantity = propQuantityVal;
         update(); // Trigger repaint
@@ -289,14 +291,26 @@ private:
             }
         }
 
-        // --- Draw current altitude box ---
-        QRectF box(tapeX + 2, -3, 15, 6);
-        painter.setBrush(Qt::black);
-        painter.setPen(QPen(Qt::red, 0.5));
-        painter.drawRect(box);
-        painter.setPen(QPen(Qt::green, 0.5));
-        QString text = QString::number(int(altitude));
-        painter.drawText(tapeX + 4, 1, text);
+        if (altitude >= 0) {
+            // --- Draw current altitude box ---
+            QRectF box(tapeX + 2, -3, 15, 6);
+            painter.setBrush(Qt::black);
+            painter.setPen(QPen(Qt::red, 0.5));
+            painter.drawRect(box);
+            painter.setPen(QPen(Qt::green, 0.5));
+            QString text = QString::number(int(altitude));
+            painter.drawText(tapeX + 4, 1, text);
+        }
+        else {
+            // --- Draw current altitude box ---
+            QRectF box(tapeX + 2, -3, 20, 6);
+            painter.setBrush(Qt::black);
+            painter.setPen(QPen(Qt::red, 0.5));
+            painter.drawRect(box);
+            painter.setPen(QPen(Qt::green, 0.5));
+            QString text = QString::number(abs(int(altitude)));
+            painter.drawText(tapeX + 4, 1, "NEG " + text);
+        }
         painter.drawText(tapeX-3, -62, "ALT AGL");
         painter.restore();
     }
@@ -463,7 +477,7 @@ private:
             painter.drawArc(-95, oldPos, 2*radius, 2*radius, 180 * 16, 270 * 16);
             painter.setPen(QPen(Qt::yellow, 0.5));
             painter.setFont(QFont(customFontFamily, 3));
-            QString textRpm = QString::number(int(rpm));
+            QString textRpm = QString::number(int(rpm[i-1]));
             painter.drawText(-92.5, oldPos + 20, "RPM #" + QString::number(i));
             painter.setPen(QPen(Qt::white, 0.5));
             painter.drawText(-90, oldPos + 10, textRpm);
@@ -493,7 +507,7 @@ private:
     float altitude;
     float speed;
     float heading;
-    int rpm;
+    int rpm[4];
     float batteryState;
     int propQuantity;
     std::string flightMode;

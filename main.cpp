@@ -76,7 +76,7 @@ public:
 private slots:
     void updateSimulation() {
         // Simulate flight data (replace with real telemetry parsing)
-        simTime += 0.0;
+        simTime += 0.02;
 
         // Simulate gentle banking and pitching
         float pitch = 90.0f * std::sin(simTime * 0.2);
@@ -86,10 +86,15 @@ private slots:
         // Simulate other parameters
         float altitudeRate = 2000.0f;
         float altitude = 200.0f + altitudeRate * std::sin(simTime * 0.2);
-        int rpm = 2500.0f - 1000.0f * std::sin(simTime * 0.4);
         float batteryState = 4.2f + 1.0f * std::sin(simTime * 5);
         // Quantity of propellers in uav (for rpm quantity)
         int propQuantity = 4;
+        int rpm[4] = {
+            static_cast<int>(2500 + 1560.0f * std::sin(simTime * 0.2)),
+            static_cast<int>(2500 + 1210.0f * std::sin(simTime * 0.25)),
+            static_cast<int>(2500 + 1543.0f * std::sin(simTime * 0.27)),
+            static_cast<int>(2500 + 1673.0f * std::sin(simTime * 0.29))
+        };
         std::string flightMode = "ATLC Takeoff Active";
         std::time_t now = std::time(nullptr);
         std::tm* localTime = std::localtime(&now);
