@@ -76,7 +76,7 @@ public:
 private slots:
     void updateSimulation() {
         // Simulate flight data (replace with real telemetry parsing)
-        simTime += 0.0;
+        simTime += 0.02;
 
         // Simulate gentle banking and pitching
         float pitch = 90.0f * std::sin(simTime * 0.2);
