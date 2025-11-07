@@ -82,9 +82,30 @@ protected:
         drawGauges(painter);
 
         drawQNH(painter);
+
+        drawCrosshair(painter);
     }
 
 private:
+    void drawCrosshair(QPainter &painter) {
+        painter.save();
+
+        painter.setPen(QPen(Qt::white, 1));
+
+        // Left line
+        painter.drawLine(-5, 0, -10, 0);
+
+        // right line
+        painter.drawLine(5, 0, 10, 0);
+
+        // down line
+        painter.drawLine(0, 5, 0, 10);
+
+        // up line
+        painter.drawLine(0, -5, 0, -10);
+
+        painter.restore();
+    }
     void drawHorizon(QPainter &painter) {
         painter.save();
 
@@ -243,13 +264,13 @@ private:
         painter.setPen(QPen(Qt::green, 0.5));
 
         // Wings
-        painter.drawLine(-12, 0, -6, 0);
-        painter.drawLine(6, 0, 12, 0);
+        painter.drawLine(-12, 1, -6, 1);
+        painter.drawLine(6, 1, 12, 1);
         //W shape
-        painter.drawLine(-6, 0, -3, 3);
-        painter.drawLine(6, 0, 3, 3);
-        painter.drawLine(-3, 3, 0, 0);
-        painter.drawLine(3, 3, 0, 0);
+        painter.drawLine(-6, 1, -3, 4);
+        painter.drawLine(6, 1, 3, 4);
+        painter.drawLine(-3, 4, 0, 1);
+        painter.drawLine(3, 4, 0, 1);
 
         painter.restore();
     }
